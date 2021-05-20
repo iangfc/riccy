@@ -28,20 +28,18 @@ Note that this is a pretty soft contract, as it's really here for _demonstration
 
 Because I'm trialling a few different ideas here, I need some params:
 
-ISSUER = iangfc     # note this applies to where this file is stored and to the paymail below, fwiw
-PRICE = 100
-ADDRESS = 1Mi2Hha5QM1zXD2tjJUv9carJis5zrStXz
-PAYMAIL = iangfc@centbee.com
+* ISSUER = iangfc     # note this applies to where this file is stored and to the paymail below, fwiw
+* PRICE = 100
+* ADDRESS = 1Mi2Hha5QM1zXD2tjJUv9carJis5zrStXz
+* PAYMAIL = iangfc@centbee.com
 
-Now, in extremely simple terms, this is a *program readable* Ricardian Contract with params formed in the above format;  where that parameter is now used to set any variable found elsewhere using the moustache or double curly convention.
+Now, in extremely simple terms, this is a *program readable* Ricardian Contract with params laid out in the above format;  where that parameter is now used to set any variable found elsewhere using the moustache or double curly convention.
 
-For sake of argument we will specify:  any line with a single (program language style) word to left, an equals symbol, and whatever comes after that until end of line or a comment symbol led by a hash.  Or in EBNF if I can recall my crusty CS:
+For sake of argument we will specify:  any line with a star, then a single (program language style) word to left, an equals symbol, and whatever comes after that until end of line or a comment symbol led by a hash.  Or in EBNF if I can recall my crusty CS:
 
-Parameter = identifier , "=", value [ "#" , text ] ;
+Parameter = "*", identifier , "=", value [ "#" , text ] ;
 
 Variable = "{{", Parameter, "}}" ;
-
-Where, recursively, these are parameters and even {{Parameter}}s with the value above.  Whatever.
 
 ## FORMAT
 
@@ -54,12 +52,14 @@ All disputes will be resolved by rolling fair dice at a beach bar of my choice, 
 ## OMISSIONS
 
 For various reasons which I won't explain today, I am leaving some stuff out:
-* _named clauses_ so clauses can't be extracted by name,
+* _named clauses_ so clauses, being the human readable parts, can't be extracted by name,
 * _my issuer signature_ which is to say, this document does not have a single observable token within it that could be interpreted as a signature by me making it a good offer, and nor does it have my public key.
 * _routing_ to a payment system, as this is hard coded above for ease of experiment.
 * tight specification of Markdown, check out the github doco, but don't expect too much.
 * compliance with EBNF which you can read about on wikipedia.  Expect less.  Oops, I forgot whitespace.
 
+These are left as exercise to the reader, um, counterparty.
+
 ## END
 
-Anything not included above is missing.  File a dispute.
+Anything not included above is missing.  File a dispute.  Find my beach bar, bring dice and money.
