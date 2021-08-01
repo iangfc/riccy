@@ -35,6 +35,7 @@ Because I'm trialling a few different ideas here, I need some params:
 The following elements are needed
 * subtype = sale       ## Which suggests that the licence can also describe its own sale.
 - The subtype {{subtype}} can then go on to require these additional params:
+* chain = BSV          ## Important to not send value to the wrong chain/address formats
 * PRICE = 100
 * BSV_address = 1Mi2Hha5QM1zXD2tjJUv9carJis5zrStXz
 * PAYMAIL = iangfc@centbee.com
