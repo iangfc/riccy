@@ -20,7 +20,7 @@ Because it is a contract, I have to offer something to you, the reader and holde
 
 Now, also because this is a contract, you should both _accept_ and _provide good consideration_ for this above right, so that we establish a contract between us as parties.  Therefore:
 
-**Consideration** I {{ISSUER}} require you to send, and you agree to send {{PRICE}} sats (or as many as fees, good graces and general happiness inspire you) to {{BSV_address}} on the BSV network, citing the Ricardian Hash of this contract.  The act of sending is your _acceptance_ and the sats are good consideration.  Fame and fortune to follow.
+  **Consideration** I {{ISSUER}} require you to send, and you agree to send {{PRICE}} sats (or as many as fees, good graces and general happiness inspire you) to {{BSV_address}} on the BSV network, citing the Ricardian Hash of this contract.  The act of sending is your _acceptance_ and the sats are good consideration.  Fame and fortune to follow.
 
 Note that this is a pretty soft contract, as it's really here for _demonstration purposes_ as to what a contract is.  Also the LICENCE.md file somewhere nearby provides additional possibilities.  Also, it's all *AS IS* and dispute resolution guarantees happy outcomes.
 
@@ -33,14 +33,14 @@ Because I'm trialling a few different ideas here, I need some params:
 * ISSUER = iang        ## note this describes the name of the person issuing, required for most contracts
 
 The following elements are needed
-* subtype = sale       ## Which suggests that the licence can also describe its own sale.
-- The subtype {{subtype}} can then go on to require these additional params:
-* chain = BSV          ## Important to not send value to the wrong chain/address formats
-* PRICE = 100
-* BSV_address = 1Mi2Hha5QM1zXD2tjJUv9carJis5zrStXz
-* PAYMAIL = iangfc@centbee.com
+ * subtype = sale       ## Which suggests that the licence can also describe its own sale.
+ - The subtype {{subtype}} can then go on to require these additional params:
+ * chain = BSV          ## Important to not send value to the wrong chain/address formats
+ * PRICE = 100
+ * BSV_address = 1Mi2Hha5QM1zXD2tjJUv9carJis5zrStXz
+ * PAYMAIL = iangfc@centbee.com
 
-Now, in extremely simple terms, this is a *program readable* Ricardian Contract with params laid out in the above format;  where that parameter is now used to set any variable found elsewhere using the moustache or double curly convention.
+In extremely simple terms, this is a *program readable* Ricardian Contract with params laid out in the above format;  where that parameter is now used to set any variable found elsewhere using the moustache or double curly convention.
 
 The rest of the document other than the parameters above is done according to
 [GitHub Flavoured Markdown Spec](  https://github.github.com/gfm/ ).
@@ -57,14 +57,15 @@ or more simply,
 ## OMISSIONS
 
 For various reasons which I won't explain today, I am leaving some stuff out:
-* _my issuer signature_ which is to say, this document does not have a single observable token within it that could be interpreted as a signature by me making it a good offer, and nor does it have my public key.
-* _routing_ to a payment system, as this is hard coded above for ease of experiment.
-* how the _Ricardian hash_ is calculated.
+  * _my issuer signature_ which is to say, this document does not have a single observable token within it that could be interpreted as a signature by me making it a good offer, and nor does it have my public key.
+    + some versions might have a simply hash signature just to put in a tech marker. 
+  * _routing_ to a payment system, as this is hard coded above for ease of experiment.
+  * how the _Ricardian hash_ is calculated.
 
-These are left as exercise to the reader, um, counterparty.
+These are subject of a higher level, and are left as exercise to the reader, um counterparty, um developer.
 
 ## END
 
 Anything not included above is missing.  File a dispute.  Find my beach bar, bring dice and money.
 
-SIG =
+   * SIG =
