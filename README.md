@@ -68,4 +68,4 @@ These are subject of a higher level, and are left as exercise to the reader, um 
 
 Anything not included above is missing.  File a dispute.  Find my beach bar, bring dice and money.
 
-   * SIG =
+   * SIG = 7d5b2c67760a865413acf2453a86b542e43fb442
