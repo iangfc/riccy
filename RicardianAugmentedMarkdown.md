@@ -1,7 +1,7 @@
 
 # Ricardian Augmented Markdown
 
- * Version = 0.0.2
+ * Version = 0.0.4
 
 This format for Ricardian contracts is compatible with and layered over the
 [GitHub Flavoured Markdown Spec](https://github.github.com/gfm/).
@@ -18,27 +18,27 @@ Note that this layer sees through most of the Markdown formatting, as formatting
 ## Tag-value Parameters
 A basic parameter is a line with
  + a star (bullet list item),
- + a single (program language style) tag word,
+ + a single (program language style) tag name,
  + an assignment symbol, which can be one of:
      + equals symbol = or,
      + a plus-equals symbol +=, and
  + whatever comes after that until end of line (or a comment symbol XXX unimplemented).
 
-The presence of = or += in a star bullet list is a trigger, and has to be formatted correctly with at least a space between the bullet and tag, and a space between the tag and the symbol. If there is no value, then the second space can be missing (and will be stripped anyway by canonicalisation).
+The presence of = or += in a star bullet list is a trigger, and has to be formatted correctly with at least a space between the bullet and tag, and a space between the tag and the symbol. No spaces are needed after the symbol, and if there is no value, then then any spaces will be stripped anyway by canonicalisation.
 
-Params come in two forms. Fristly as a specific one line assignment using star bullet lists
+Params come in two forms. _Firstly_ as a specific one line assignment using star bullet lists
 (and in 2 variants):
 
  * Tag = some value words, until eoln.
  + which bullets can be intermingled inside a list...
  * TAG_2 = can have some more value words.
- + The second form is the array form:
+ + The _second form_ is the array form:
  * Tag-3.array += Using += signals that this Tag-3 has an array or multivalue form,
  * Tag-3.array += which is useful for routing to URLs that are replicated.
  * Tag.4.singleton = You can mix += symbols, the first one counts.
  * Whitespace = you must have at least a space after the star bullet and before the symbol (after the symbol is optional because canonicalisation will trim an empty value back to the symbol
 
-The above shows all legal tags.  Others include t.a.g
+The above shows all legal tags.  Others include t.a.g with punctuation inside the word but not on the outside.
 
 The rules for tag naming are similar to programming languages:
  * Tags start with an alpha [a-zA-Z].
@@ -101,11 +101,12 @@ Whereas these are not legal:
  + ends on this line --> but <!-- starts again on the same line
  + before ending! --> and vice versa
  + <!-- a comment with a comment start in it: <!-- -->
+ + an end of comment, without a beginning, or end of file without closing the comment
 
-Comments of a HTML form are much harder because they can cross lines,
-and we do want to impose a DOM model
+<!-- NB: Comments of a HTML form are much harder because they can cross lines,
+and we do not want to impose a DOM model
 nor a look-ahead parser on the coder, hence there are the above limitations
-to make it easier for a simple line based parser.
+to make it easier for a simple line based parser. -->
 
 Comments are not a normal legal convention but I have found that comments are very useful;
 this may reflect a different mindset coming from a CS background, where we comment our code!
