@@ -55,7 +55,7 @@ Markdown is basically a formatting concept, not parameter expression concept,
 and hopefully there is minimal collision in semantics between the two formats.
 The combined format might be Ricardian Topping on GitHub Flavoured Markdown Format
 or more simply,
-<a href="RicardianAugmentedFormat.md">Ricardian Augmented Format</a>.
+<a href="RicardianAugmentedMarkdown.md">Ricardian Augmented Markdown</a>.
 
 ## LEGAL
 
