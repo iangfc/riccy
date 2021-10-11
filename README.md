@@ -1,4 +1,4 @@
-# 'new gen' riccy v0.4
+# 'new gen' riccy v0.5
 
 This file is a test bed for some ideas I have.  It is a Ricardian contract (or it will be when slight munging is done and the gods of financial cryptography smile) that implements certain ideas, and the discovery of these is also the content of the contract.
 
@@ -85,4 +85,4 @@ Anything not included above is missing.  File a dispute.  Find my beach bar, bri
 ### the Signature section
 
 Is encoded like this, being a final bullet point with tag name of SIG:
-   * SIG = JUNK
+   * SIG = 6475b6885d10d9e19ca568440e763e33a3770e39
