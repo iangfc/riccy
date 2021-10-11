@@ -85,4 +85,4 @@ Anything not included above is missing.  File a dispute.  Find my beach bar, bri
 ### the Signature section
 
 Is encoded like this, being a final bullet point with tag name of SIG:
-   * SIG = 6475b6885d10d9e19ca568440e763e33a3770e39
+   * SIG = 8d5859f6e6d66ddc24501b4ac1da2b3f7cb93e04
