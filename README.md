@@ -7,7 +7,8 @@ This file is a test bed for some ideas I have.  It is a Ricardian contract (or i
 YOU are a holder of a unit of this instrument as issued on a digital rights system (eg a blockchain).
 
 **RicardianHash.** The Ricardian Hash is the hash of this very document,
-which is calculated over the raw markdown using a standard hash algorithm (pending).
+which is calculated over the raw markdown using a standard hash algorithm.
+Which it is can vary, but for this experiment, it is {{HASH}}.
 **
 
 Note that additional Terms are defined in Parameters below.
@@ -45,17 +46,23 @@ The following elements are needed
  * PRICE = 100
  * BSV_address = 1Mi2Hha5QM1zXD2tjJUv9carJis5zrStXz
  * PAYMAIL = iangfc@centbee.com
+ * HASH = SHA1
 
 In extremely simple terms, this is a *program readable* Ricardian Contract with parameters laid out in the above format;  where that parameter is now used to set any variable found elsewhere using the moustache or double curly convention.
 
 ### Markdown Formatting
-The rest of the document (other than the names of the parameters above) is done according to
+Other than the names of the parameters (as above) the document is formatted according to
 [GitHub Flavoured Markdown Spec](https://github.github.com/gfm/).
 Markdown is basically a formatting concept, not parameter expression concept,
 and hopefully there is minimal collision in semantics between the two formats.
-The combined format might be Ricardian Topping on GitHub Flavoured Markdown Format
+The combined format might be called Ricardian Topping on GitHub Flavoured Markdown Format
 or more simply,
 <a href="RicardianAugmentedMarkdown.md">Ricardian Augmented Markdown</a>.
+
+Note that conversion of moustached or double-curly paramaters in text such as {{TYPE}}
+to the word 'licence' is more of a display issue.  After having parsed the paramaters,
+a display engine has to then re-parse to replace all the params in some fashion which is
+not tightly defined at this level.
 
 ## LEGAL
 
@@ -64,7 +71,8 @@ or more simply,
 ### Omissions
 
 For various reasons which I won't explain today, I am leaving some stuff out:
-  * _my issuer signature_.  This document has only a simple observable hash token on it, but that serves as a place-marker rather than as an identifiable public key signature.
+  * Inclusions. Like #include in C, a contract can include another text by reference to it.
+  *  _my issuer signature_.  This document has only a simple observable hash token on it, but that serves as a place-marker rather than as an identifiable public key signature.
   * _routing_ to a payment system, as this is hard coded above for ease of experiment.
   * how the _Ricardian hash_ is calculated.
 
@@ -77,4 +85,4 @@ Anything not included above is missing.  File a dispute.  Find my beach bar, bri
 ### the Signature section
 
 Is encoded like this, being a final bullet point with tag name of SIG:
-   * SIG = e51f828580f63325a625115fbc139aa7d9abdbd2
+   * SIG = JUNK
