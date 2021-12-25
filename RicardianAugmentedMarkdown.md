@@ -1,51 +1,71 @@
 
 # Ricardian Augmented Markdown
 
- * Version = 0.0.4
+ * Version = 2.0.5
+ + let's call the Ini format Version 1.
 
 This format for Ricardian contracts is compatible with and layered over the
 [GitHub Flavoured Markdown Spec](https://github.github.com/gfm/).
 Part of this project is to experiment with the use of github editing
 as a collaboration tool for programmers to write Ricardian contracts,
-so it is natural to rely on that specification; but it is likely that
-other [Markdowns](https://commonmark.org/) work as well.
+so i is natural to rely on that specification; other
+[Markdowns](https://commonmark.org/) have not been considered but there is
+no known reason why they wouldn't work.
 
 The format - RicardianAugmentedMarkdown or RAM for now
 is designed to allow a simple line-based parser to extract
 what it needs and not require complicated processing typical of sophisticated grammars.
-Note that this layer sees through most of the Markdown formatting, as formatting is not it's job.
+Note that the RAM layer sees through most of the Markdown formatting, as formatting is not it's job.
+
+NB, in the following, as a convention,
+the use of a star bullet point is hopefully a valid parameter,
+and the use of plus or minus is commentary.  But you won't see that in the formatted form.
 
 ## Tag-value Parameters
 A basic parameter is a line with
- + a star (bullet list item),
+ + a star (bullet list item, and no other bullet like plus or dot),
  + a single (program language style) tag name,
  + an assignment symbol, which can be one of:
      + equals symbol = or,
      + a plus-equals symbol +=, and
- + whatever comes after that until end of line (or a comment symbol XXX unimplemented).
+ + whatever comes after that until end of line (or a comment starts).
 
 The presence of = or += in a star bullet list is a trigger, and has to be formatted correctly with at least a space between the bullet and tag, and a space between the tag and the symbol. No spaces are needed after the symbol, and if there is no value, then then any spaces will be stripped anyway by canonicalisation.
 
-Params come in two forms. _Firstly_ as a specific one line assignment using star bullet lists
-(and in 2 variants):
+Params come in three forms.
+_Firstly and secondly_ as a specific one line assignment using star bullet lists.
+  + _First_, if = is used, it signals a _singleton_ or singular value, and cannot be repeated.
+  + _Second_ if += is used, this becomes an array of values, and by adding more with that tag,
+more values are added.
+
+Otherwise, the rules are the same for each of these two forms:
 
  * Tag = some value words, until eoln.
- + which bullets can be intermingled inside a list...
+     + which bullets can be intermingled inside a list...
  * TAG_2 = can have some more value words.
  + The _second form_ is the array form:
- * Tag-3.array += Using += signals that this Tag-3 has an array or multivalue form,
- * Tag-3.array += which is useful for routing to URLs that are replicated.
+ * Tag-3.array += iang.org
+     + Using += signals that this Tag-3 has an _array_ or multivalue form,
+ * Tag-3.array += github.com
+     + which is useful for (eg) routing to URLs that are replicated.
  * Tag.4.singleton = You can mix += symbols, the first one counts.
- * Whitespace = you must have at least a space after the star bullet and before the symbol (after the symbol is optional because canonicalisation will trim an empty value back to the symbol
+ * Whitespace = you must have at least a space after the star bullet and before the symbol
+     + after the symbol is optional because canonicalisation will trim an empty value back to the symbol
 
-The above shows all legal tags.  Others include t.a.g with punctuation inside the word but not on the outside.
+###Rules for Tag Names
+The above shows several legal tags in legal parameters. The rules for tag naming are similar to programming languages:
 
-The rules for tag naming are similar to programming languages:
- * Tags start with an alpha [a-zA-Z].
- * Tags end with an alphanumeric [a-zA-Z0-9].
- * Tags contain also numerals (not in first character) and three symbols hyphens, fullstops and underscores [a-zA-Z0-9_-.] (not in first or last character).
- * Tags are Case Sensitive; "Oh, East is East, and west is west, and never the twain shall meet." Devs are familiar with this concept, and I am [reliably informed](https://twitter.com/CommonAccord/status/1421570064206090242) that lawyers are careful too.
- * Be careful with underscores in the tag name as they can also be interpreted as emphasis by markdown.
+ + Tags start with an alpha [a-zA-Z].
+ + Tags end with an alphanumeric [a-zA-Z0-9].
+ + Tags contain also
+     + numerals (not in first character) and
+     + three symbols being hyphens, fullstops and underscores [a-zA-Z0-9_-.] (not in first or last character).
+ + Tags are Case Sensitive;
+     + "Oh, East is East, and west is west, and never the twain shall meet."
+     + Devs are familiar with this concept, and I am
+       [reliably informed](https://twitter.com/CommonAccord/status/1421570064206090242)
+       that lawyers are careful too.
+ + Be careful with underscores in the tag name as they can also be interpreted as emphasis by markdown.
 
 Illegal tags would include 1bad, -bad, bad#tag, .bad or bad_ or bad= .  XXX Don't duplicate the punctuation, as that will likely be enforced as bad: dupli__cated..punct-._ation would be bad.
 
@@ -55,19 +75,21 @@ Illegal tags would include 1bad, -bad, bad#tag, .bad or bad_ or bad= .  XXX Don'
 which starts with an emphasised tag word, in this case
 the tag Multiline will have these 3 lines.
 
-*Closure* Following the tag line is any number of lines of text, including paragraphs and empty lines.
+*Closure* Following the tag line is any number of lines of text,
+including paragraphs, comments and empty lines.
 The multiline format is always closed by
-  + a new section, like this one for Multiline above,
-  + the end of file, or
-  + two or more stars on its own line followed by an empty line or other block closer, as follows this very line.
+  + a new section, like this one for Multiline above, or
+  + two or more stars on its own line, as follows this very multiline.
 Sadly, when markdown renders its formatting on double-star,
-it folds all these lines into one para, so it ends up displayed on the end of line, not the next line.
-No matter, *remember* to place the double-star on its own line in the raw text:
+it folds all these lines into one para,
+so it ends up displayed on the end of line, not the next line.
+No matter, _remember_ to place the double-star on its own line in the raw text:
 **
 
-*Closed.*  See! In the Ricardian, the above is now closed and a new one is opened, called Closed.
+*Closed.*  See! In the Ricardian, the above is now closed and a new multiline is opened,
+this time called Closed.
 It has to have the closing marker by itself on its own line to avoid the
-Ricardian parser doing strange things.  Another way to close it is to use three or more stars:
+Ricardian parser doing strange things.  Another way to close it is to use more stars than two:
 ***
 
 Which should trigger a line in HTML in the displayed text.  Let's see.
@@ -81,44 +103,48 @@ This should be done carefully by the author as the Markdown parser sees undersco
 This will be stripped off, it is not part of the tag.
 
 *Applicability.* The Multiline hasn't been used much in the past for contractual writing,
-but there are certain key elements in contracts that need it.
+but there are certain key technical elements in contracts that need it such as keys.
 
 ## Comments
 HTML comments <!-- like this one --> are implemented in a partial form:
  
  - no comments before start or after sig/end
  - only one comment (pair or begin or end) per line
- - any tag assignments inside comments must be ignored
+ - any parameters inside comments must be ignored
+ - mixing comments with the start of a multiline is verbotten! as a simple line-based parser cannot cope with two multi-line things going on at once.
 
 Hence the following are legal:
- * <!-- this is a comment -->
- * <!-- this is a multiline
-comment that doesn't end until -->
+  + <!-- this is a comment -->
+  + <!-- this is a multiline
+comment that doesn't end until it ends: -->
 
 Whereas these are not legal:
- + <!-- one --> and <!-- two --> multiple comments on one line
- + <!-- starts on one line
- + ends on this line --> but <!-- starts again on the same line
- + before ending! --> and vice versa
- + <!-- a comment with a comment start in it: <!-- -->
- + an end of comment, without a beginning, or end of file without closing the comment
+  + <!-- one --> and <!-- two --> multiple comments on one line
+  + <!-- starts on one line
+  + ends on this line --> but <!-- starts again on the same line
+  + before ending! --> and vice versa
+  + <!-- a comment with a comment start in it: <!-- -->
+  + any text with an unopened comment --> ending in it
+  + end of file without closing the comment
 
-<!-- NB: Comments of a HTML form are much harder because they can cross lines,
-and we do not want to impose a DOM model
-nor a look-ahead parser on the coder, hence there are the above limitations
-to make it easier for a simple line based parser. -->
-
-Comments are not a normal legal convention but I have found that comments are very useful;
+NB1. Comments are not a normal legal convention but I have found that comments are very useful;
 this may reflect a different mindset coming from a CS background, where we comment our code!
 The meaning of comments is ultimately found in dispute resolution, but
 the suggestion herein is that they are not a legally binding part of the contract.
 For this reason, it is useful for the comment to be treated as 'softer' by the markdown.
 
+<!-- NB2: Comments of a HTML form are much harder because they can cross lines,
+and we do not want to impose a DOM model
+nor a look-ahead parser on the coder, hence there are the above limitations
+to make it easier for a simple line based parser.
+It would be far better if we could use line-based comments as with compute languages
+such as // in Java but I can see no way to do that in Markdown :-( . -->
+
 ## Headings
 
 ### Formats
 Headings should be in strict ATX format, that is as above with leading hashes.
-SETEXT headings are not supported (those with a line underneath)
+SETEXT headings are not supported (those with a --- line underneath)
 which is to say they are ignored by the Ricardian parser.
 The only import of this is that the Primary Heading (below) must be a single hash heading.
 
@@ -136,15 +162,17 @@ Only spaces should be used where whitespace is indicated, such as surrounding th
 ### Canonicalisation
 In order to assist repeatable hashing so that the document has one clear message digest as an identifier,
 the document is canonicalised before hashing and before signing.
-Canonicalisation is these rules:
+Canonicalisation consists of these rules:
  1. All empty lines before the primary header and after the signature trailer are removed.
  2. All whitespace including end of line characters is removed from the end of every line.
  3. Every line has a newline '\n' or 0x0a added to it.
 
-Note that this differs from previous rules in a couple of ways. Firstly, prior generations used MS end of line "\r\n" as the hashing line terminator. But MS tools don't surface that ending any more whereas the ending (and text formatted documents) are still prevalent in Linux/Mac/Unix platforms. Secondly, every line gets a line ending, unlike OpenPGP which dropped the last one. Having a separate rule for the last line is just a nuisance to the coder.
+Note that this differs from previous rules in a couple of ways.
+Firstly, prior generations used MS end of line "\r\n" as the hashing line terminator. But MS tools don't surface that ending any more whereas the ending (and text formatted documents) are still prevalent in Linux/Mac/Unix platforms.
+Secondly, every line gets a line ending, unlike (Open)PGP which dropped the last line ending. Having a separate rule for the last line is just a nuisance to the coder.
 
 ### UTF
-No UTF supported as yet.
+No UTF supported as yet.  It should work...
 
 ## EBNF
 
@@ -167,21 +195,23 @@ Or in EBNF if I can recall my crusty CS:
 
     lastletter = firstletter | [0-9]
 
-## Begin and End
+## It Begins and It Ends
 Having a defined start and end makes it easy for line-based parsers to look
-at what format a file might be in.
+at what format a file might be in, and to define where hashing starts and stops.
 
 ### Start Heading
-The Ricardian must start with a single one-hash non-empty heading as the first line (after empties, which must be stripped out) as is shown at top of this file.
+The Ricardian must start with a single one-hash non-empty heading as the first line
+(after empty lines, which must be stripped out) as is shown at top of this file.
 This first primary Heading is essential to signal that this is a RAM file,
 and to initiate the start of hashing.
 
 0-3 spaces leading is OK, more will cancel the heading (TBD).
 Always have one space after the leading hashes (TBD).
-Optional hashes after a space are stripped from the name/heading in formatting/presentation (TBD).
+
+Experimental - the title in the starting heading is captured into a parameter 'title' for convenience. Optional hashes after a space are stripped from the name/heading in formatting/presentation (TBD).
 
 ### End Sig
-The Ricardian is ended by the paramater SIG being the signature of the contract
+The Ricardian is ended by the parameter SIG being the signature of the contract
 by the issuer.
 NB, as with the first heading, this defines the end of hashing.
 
@@ -204,5 +234,8 @@ the Ricardian hash. This might bring into light the limits of the one-sig approa
 original Ricardian issuance contracts. It suggests we need a wide protocol around the
 notions of hash-then-sign and sign-then-hash.
 -->
+
+And, because this is nominally a correct RAM file, here comes the ending SIG,
+including a redundant empty line to strip off:
 
 * SIG =
