@@ -1,3 +1,5 @@
+
+# Dos and Don'ts
 Some tips on how to live happily in Ricardiana.
 
 ##Stars
