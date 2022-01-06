@@ -50,6 +50,33 @@ The following elements are needed
 
 In extremely simple terms, this is a *program readable* Ricardian Contract with parameters laid out in the above format;  where that parameter is now used to set any variable found elsewhere using the moustache or double curly convention.
 
+### YAML params
+As an additional experiment, here is an alternative layout
+using YAML in Markdown's embedded text mode:
+
+    Discount: if you buy ten, you can get 1 for free,
+       but you have to get in fast.
+    Coupon: 10 # means you can redeem 10 for 1.
+    Key: !!binary |
+       R0lGODlhDAAMAIQAAP//9/X
+       17unp5WZmZgAAAOfn515eXv
+       Pz7Y6OjuDg4J+fn5OTk6enp
+       56enmleECcgggoBADs=
+
+Or also, using YAML in a Markdown fenced code block:
+``` yaml
+YAML-spec:  https://yaml.org/spec/1.2.2/
+YAML-notion: >
+    The notion of using YAML as an embedded or fenced code block
+    is a bit more readable within the block,
+    and allows standard parsers to be used (of which there are many).
+YAML-set:
+- one
+- two
+- multiple entries as needed for routing.
+```
+The above should be legal YAML but note that only the absolute minimum should be defined.
+
 ### Markdown Formatting
 Other than the names of the parameters (as above) the document is formatted according to
 [GitHub Flavoured Markdown Spec](https://github.github.com/gfm/).
