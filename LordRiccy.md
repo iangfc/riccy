@@ -4,17 +4,19 @@ DATED AS OF {SIGNED_DATE}  <!-- sadly, there is no centering in Markdown -->
 
 For {{proceeds}} in {{quantity}} Units of {{unit_price}} each
 of limited liability company interests in
-_RILED RICCY VENTURES_,
-A Wydahomahai Limited Liability Company (the “LLC”),
+
+__RILED RICCY VENTURES__,
+
+a Wydahomahai Limited Liability Company (the “LLC”),
 to be formed for the purpose of facilitating financing
 for the production and exploitation of a motion picture
 tentatively titled:
 
-   _Lord Riccy & The Paradox of the Contracted Robot_
+_Lord Riccy & The Paradox of the Contracted Robot_
 
 "BOILERPLATE IS GOOD FOR THE SOUL."
 
-For the exclusive use of robots born in Wydahomahai
+For the exclusive use of robots born in Wydahomahai.
 
 <!-- Copy No ___
 hmmm... no we can't as yet... To do copies would imply that this were also an issuance, of the document not the contract.
@@ -24,7 +26,7 @@ obligations on one as opposed to the other.  So, like an invoicing cycle. And, a
 Interesting challenge, let's leave that for now.
 -->
 
-## Paramaters
+## Parameters
 
  * type = shares       <!-- this tells computer how to interpret parameters  -->
  * quantity = 10       <!-- this is the total number of units issued         -->
@@ -36,6 +38,7 @@ Interesting challenge, let's leave that for now.
 ## Risk Statement
 
  **Risk_1.**  Many risks are present...
+ 
  **Risk_2.**  And more risks...
  
 ## Summary
