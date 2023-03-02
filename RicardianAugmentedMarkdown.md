@@ -53,7 +53,7 @@ Otherwise, the rules are the same for each of these two forms:
  * Whitespace = you must have at least a space after the star bullet and before the symbol
      + after the symbol is optional because canonicalisation will trim an empty value back to the symbol
 
-###Rules for Tag Names
+### Rules for Tag Names
 The above shows several legal tags in legal parameters. The rules for tag naming are similar to programming languages:
 
  + Tags start with an alpha [a-zA-Z].
