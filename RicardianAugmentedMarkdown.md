@@ -1,7 +1,7 @@
 
 # Ricardian Augmented Markdown
 
- * Version = 2.0.6
+ * Version = 2.0.6 of this document.  RAM itself is Version 2.
  + let's call the Ini format Version 1.
 
 This format for Ricardian contracts is compatible with and layered over the
@@ -12,17 +12,22 @@ so it is natural to rely on that specification; other
 [Markdowns](https://commonmark.org/) have not been considered but there is
 no known reason why they wouldn't work.
 
-The format - RicardianAugmentedMarkdown or RAM for now
+The format - RicardianAugmentedMarkdown or RAM for now -
 is designed to allow a simple line-based parser to extract
 what it needs and not require complicated processing typical of sophisticated grammars.
-Note that the RAM layer sees through most of the Markdown formatting, as formatting is not it's job.
+Note that the RAM layer sees through or ignores most of the Markdown formatting,
+as extraction not formatting is it's job.
 
 NB, in the following, as a convention,
 the use of a star bullet point is hopefully a valid parameter,
 and the use of plus or minus is ignored as non-RAM Markdown.
 But you won't see that difference reflected in the formatted form.
 
-## Tag-value Parameters
+## Parameters
+
+There are three parameter forms:  Singletons, Arrays, and Multilines.
+
+### Tag-value Parameters (Singletons and Arrays)
 A basic parameter is a line with
  + a star (bullet list item, and no other bullet such as plus or dot),
  + a single (program language style) tag name,
@@ -33,7 +38,7 @@ A basic parameter is a line with
 
 The presence of = or += in a star bullet list is a trigger, and has to be formatted correctly with at least a space between the bullet and tag, and a space between the tag and the symbol. No spaces are needed after the symbol, and if there is no value, then then any spaces will be stripped anyway by canonicalisation.
 
-Params come in three forms.
+Tag-Value Params come in two forms.
 _Firstly and secondly_ as a specific one line assignment using star bullet lists.
   + _First_, if = is used, it signals a _singleton_ or singular value, and cannot be repeated.
   + _Second_ if += is used, this becomes an array of values, and by adding more with that tag,
@@ -70,7 +75,7 @@ The above shows several legal tags in legal parameters. The rules for tag naming
 
 Illegal tags would include 1bad, -bad, bad#tag, .bad or bad_ or bad= .  XXX Don't duplicate the punctuation, as that will likely be enforced as bad: dupli__cated..punct-._ation would be bad.
 
-### Multiline tagged paragraphs
+### Multiline Tagged Paragraphs
 
 *Multiline* A paragrah can be tagged as a multiline,
 which starts with an emphasised tag word, in this case
@@ -147,6 +152,7 @@ It would be far better if we could use line-based comments as with computer lang
 such as // in Java but I can see no way to do that in Markdown :-( . -->
 
 ## Headings
+Headings are for the reader, not the parser in general.
 
 ### Formats
 Headings should be in strict ATX format, that is as above with leading hashes.
@@ -154,11 +160,13 @@ SETEXT headings are not supported (those with a --- line underneath)
 which is to say they are ignored by the Ricardian parser.
 The only import of this is that the Primary Heading (below) must be a single hash heading.
 
+<!--
 ### (TBD) Heading Tags
 I like the idea of automatically tagging the headings with eg 1.2 or 3.4.
 But is it worth it to do such complications?
 
 Another possibility is to insert tag names into the headings, as with the multiline paragraph.
+-->
 
 ## Details
 
@@ -171,16 +179,19 @@ the document is canonicalised before hashing and before signing.
 Canonicalisation consists of these rules:
  1. All empty lines before the primary header and after the signature trailer are removed.
  2. All whitespace including end of line characters is removed from the end of every line.
- 3. Every line has a newline '\n' or 0x0a added to it.
+ 3. Every line has a *nix* newline '\n' character (0x0a) added to it.
 
 Note that this differs from previous rules in a couple of ways.
-Firstly, prior generations used MS end of line "\r\n" as the hashing line terminator. But MS tools don't surface that ending any more whereas the ending (and text formatted documents) are still prevalent in Linux/Mac/Unix platforms.
-Secondly, every line gets a line ending, unlike (Open)PGP which dropped the last line ending. Having a separate rule for the last line is just a nuisance to the coder.
+Firstly, prior generations used MS end of line "\r\n" as the hashing line terminator.
+But MS tools don't surface that ending any more whereas the '\n' ending
+whereas text formatted documents are still prevalent in Linux/Mac/Unix platforms.
+Secondly, every line gets a line ending, unlike (Open)PGP which dropped the last line ending.
+Having a separate rule for the last line is just a nuisance to the coder.
 
 ### UTF
-No UTF supported as yet.  It should work...
+No UTF supported as yet (TBD). It should work...???
 
-## EBNF
+### EBNF
 
 Or in EBNF if I can recall my crusty CS:
 
@@ -201,7 +212,7 @@ Or in EBNF if I can recall my crusty CS:
 
     lastletter = firstletter | [0-9]
 
-## It Begins and It Ends
+### It Begins and It Ends
 Having a defined start and end makes it easy for line-based parsers to look
 at what format a file might be in, and to define where hashing starts and stops.
 
@@ -211,31 +222,50 @@ The Ricardian must start with a single one-hash non-empty heading as the first l
 This first primary Heading is essential to signal that this is a RAM file,
 and to initiate the start of hashing.
 
-0-3 spaces leading is OK, more will cancel the heading (TBD).
-Always have one space after the leading hash(es) (TBD).
+ + Reserved headings (first, Signatures and potentially END)
+   must have zero leading spaces. <!-- this is because parsing is much messier on these lines -->
+ + With other general headings, 0-3 spaces leading is OK, more will cancel the heading in Markdown (TBD).
+ + Always have at least one space after the leading hash(es) as required by Markdown.
+ + Experimental - the title in the starting heading can be captured into a parameter 'TITLE' for convenience (TBD).
+ + Optional trailing hashes after a space are stripped from the name/heading in formatting/presentation (TBD) as per Markdown.
 
-Experimental - the title in the starting heading is captured into a parameter 'TITLE' for convenience.
-Optional hashes after a space are stripped from the name/heading in formatting/presentation (TBD).
+### Reserved Words
+The following cannot be used:
+ - *TITLE* as a tag, reserved for the leading heading (TBD).
+ - *Signatures* as a heading, except as the last heading to only include the signatures.
+ - *SIG* as a tag, except within the Signature heading.
+ - *HASH* as a tag, as that indicates an override canonical Ricardian message digest algorithm (TBD).
+ - *END* as a heading, reserved for a future end signal, in the event that we define multiple sigatures.
+
+### WIP
+This is a work in progress and will change as code gets developed and struggles against reality.
+
+## The End
 
 ### End SIG
-The Ricardian is ended by the parameter assignment SIG
-being the signature of the contract by the issuer.
-NB, as with the first heading, this line defines the end of hashing to produce
-the canonical Ricardian hash.
+The Ricardian (currently) is ended by the parameter assignment SIG
+being the signature of the contract by the issuer, as shown at the end of this file.
 
-It can be an empty signature; what this means to higher layer code is undefined,
-but at least it can still be hashed.  This allows for unsigned inclusions such
-as standard terms and conditions to be composed into a wider agreement.  (TBD)
+NB,
+ + To make parsing easier there should be precisely one space beforen and after the bullet,
+   and also before the assignment.
+ + But, no space is necessary after the assignment as space-stripping makes that redundant.
+ + As with the first heading, this line (inclusive) defines the end of hashing to produce
+   the canonical Ricardian hash.
+ + As noted above, there cannot be any comment artifact on or after a SIG line.
+ + The signature can be empty; what this means to higher layer code is undefined,
+   but at least it can still be hashed.  This allows for unsigned inclusions such
+   as standard terms and conditions to be composed into a wider agreement (TBD).
 
-#### Multiple Signers (TBD)
+### Multiple Signers (TBD)
 The possibility of multiple signatures exist by using the += array parameter form,
 or by duplicating the singleton form to get serial signatures,
 but neither are not defined as yet.
 
 <!-- Commentary: Multiple sigs could be treated as counterparts - each over the primary
 body, and together forming an agreement. In this case, they could be appended at the end
-of the file, and stripped off for signing; the signature should be constructed over
-the file with only the one last-line containing the empty * SIG +=.
+of the file, and all stripped off for signing; the signature should be constructed over
+the file with only the one last-line containing the empty * SIG =.
 
 Then, each additional signer could strip off the existing sigs, sign, and then add their
 sig to the list. One problem with this approach is that there is no obvious way to identify
@@ -244,9 +274,11 @@ original Ricardian issuance contracts. It suggests we need a wider protocol arou
 notions of hash-then-sign and sign-then-hash.
 
 Maybe a deliberate # END signal is needed to divorce the SIG from the ending role?
+For this reason, that heading is reserved.
 -->
 
 And, because this is nominally a correct RAM file, here comes the ending SIG,
 including a redundant empty line to strip off:
 
-* SIG =
+# Signatures
+ * SIG = ThisISaFAKEarmouredSIGNATURE
