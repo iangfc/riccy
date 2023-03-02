@@ -109,7 +109,7 @@ but there are certain key technical elements in contracts that need it such as k
 (Watch this multiline be terminated by the following section 'Comments'.)
 
 ## Comments
-HTML comments <!-- like this one --> are implemented in a partial form:
+HTML comments \<!-- like this one --> are implemented in a partial form:
  
  - no comments before start or after SIG/end, nor on the 1st heading line nor on the last SIG line.
  - only one comment participant (pair or begin or end) per line
@@ -117,22 +117,20 @@ HTML comments <!-- like this one --> are implemented in a partial form:
  - mixing comments with the start of a multiline is verbotten! as a simple line-based parser cannot cope with two multi-line things going on at once.
 
 Hence the following are legal:
-  + <!-- this is a comment -->
-  + <!-- this is a multiline
-comment that doesn't end until it ends: -->
+  + \<!-- this is a comment -->
+  + \<!-- this is a multiline
+    comment that doesn't end until it ends: -->
 
 Whereas these are not legal:
-  + <!-- one --> and <!-- two --> multiple comments on one line
-  + <!-- starts on one line
-  + ends on this line --> but <!-- starts again on the same line
-  + before ending! --> and vice versa
-  + <!-- a comment with a comment start in it: <!-- -->
-  + any text with an unopened comment --> ending in it
-  + # First Line Intro \<!-- with an illegal comment -->
-  + end of file without closing the comment, as this will hide the SIG
+  - \<!-- one --> and \<!-- two --> multiple comments on one line
+  - \<!-- starts on one line
+  - ends on this line --> but \<!-- starts again on the same line
+  - before ending! --> and vice versa
+  - \<!-- a comment with a comment start in it: \<!-- -->
+  - any text with an unopened comment --> ending in it
+  - \# First Line Intro \<!-- with an illegal comment -->
+  - end of file without closing the comment, as this will hide the SIG
   * SIG = ThisIsMyArmouredSignature \<!-- this is an illegal comment -->
-
-NB1. In the parsed form of the document you might noty be able to see the above comments!  Let's test a \<!-- comment -->
 
 NB1. Comments are not a normal legal convention but I have found that comments are very useful;
 this may reflect a different mindset coming from a CS background, where we comment our code!
@@ -141,7 +139,7 @@ the suggestion herein is that they are not a legally binding part of the contrac
 For this reason, it is useful for the comment to be treated as 'softer' by the markdown
 display engine (but not disappeared, please!)
 
-<!-- NB2: Comments of the HTML form are much harder because they can cross lines,
+\<!-- NB2: Comments of the HTML form are much harder because they can cross lines,
 and we do not want to impose a DOM model
 nor a look-ahead parser on the coder, hence there are the above limitations
 to make it easier for a simple line based parser.
