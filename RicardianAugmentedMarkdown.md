@@ -6,17 +6,17 @@
 
 This format for Ricardian contracts is compatible with and layered over the
 [GitHub Flavoured Markdown Spec](https://github.github.com/gfm/).
-Part of this project is to experiment with the use of github editing
+Part of this project is to experiment with the use of GitHub editing
 as a collaboration tool for programmers to write Ricardian contracts,
 so it is natural to rely on that specification; other
 [Markdowns](https://commonmark.org/) have not been considered but there is
 no known reason why they wouldn't work.
 
-The format - RicardianAugmentedMarkdown or RAM for now -
+The format, RicardianAugmentedMarkdown or RAM for now, 
 is designed to allow a simple line-based parser to extract
 what it needs and not require complicated processing typical of sophisticated grammars.
 Note that the RAM layer sees through or ignores most of the Markdown formatting,
-as extraction not formatting is it's job.
+as extraction not formatting is its job.
 
 NB, in the following, as a convention,
 the use of a star bullet point is hopefully a valid parameter,
