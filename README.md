@@ -87,30 +87,35 @@ The formats for these controls haven't settled as yet. Here's some ideas:
 
 The name of the parameter loosely follows some well-trodden computer science conventions:
 
+ * Names start with a letter, and can include digits after the first letter.
  * Case = Uppercase and lowercase makes no difference <!-- Case is same as CASE as is case -->
- * Punctuation_marks = _,- <!-- Names can include these symbols only, they have no meaning, they are stripped out -->
+    - ok, which is it? RAM says it is case insensitive! WIP.
+ * Punctuation_marks = _,- <!-- Names can include these symbols only, they have no meaning, they are reduced to one generic symbol -->
  * Whitespace = none! <!-- So " * This Name = moo" is an invalid parameter -->
 
-**Punctuation.** This is a bit tricky. The only marks of punctuation that are accepted are underscore, dot and dash. They all mean the same thing, being a punctuation symbol, and are equivalent. Hence, {{Punk_d}} will find and show the same parameter as {{PUNK-D}} as also {{punk.D}}.
+**Punctuation.** This is a bit tricky. The only marks of punctuation that are accepted within a name are underscore, dot and dash. They all mean the same thing, being a punctuation symbol, and are equivalent. Hence, {{Punk_d}} will find and show the same parameter as {{PUNK-D}} as also {{punk.D}}.
 
-Mixing and doubling up of marks is not allowed (too messy to code).
+Mixing and doubling up of marks is not allowed (too messy to code). The marks can only appear inside the name, not at beginning nor end.
 
 ### Named Paragraphs
 
 **Named Paragraphs**. Paragraphs can be given a parameter name by highlighting that name on the first line.
 The highlighting must be the first element of the paragraph
 and must be proper in that the start must match the end.
+Only __stars__ may be used in the highlighting of the name.
 **
 
-**Termination.** Paragraphs are terminated by a single ___star-star___ on a separate line
-following the paragraph, as above.
+**Termination.** A 'Paragraph' is actually a block of text
+that may consist of many paragraphs (in this case, two).
+It or they are terminated by a single ___star-star___ on a separate line
+following the text, as above.
 In display, the termination symbol will often appear at the end of the last line,
 and the browser may soften it in some fashion.
 
-If there is no terminating ___star-star___,
-the paragraph continues until either it is found,
+If there is no terminating ___star-star___ below a paragraph,
+the block continues until either a ___star-star___ is found,
 or a heading starting with # symbols is found, or the file ends.
-This paragraph is terminated by the following heading:
+This block of two paragraphs is terminated by the following heading:
 
 #### Paragraph Name Rules
 
@@ -143,7 +148,7 @@ which is calculated over the raw markdown of that contract, and cannot be shown 
 proper contract context.
 **
 
-**HASH.** The {{Hash}} is the message digest of a current document. For this present document it can be shown, and that is helpful for a later party to copy/paste the value into their contract, so as to include this document by hash reference as a template.
+**HASH.** The {{Hash}} is the message digest of a current document. For this present document it can be shown, and that is helpful for a later party to copy/paste the value into their contract, so as to include this document by hash reference as a template. (Herein, the hashmark or # is the heading indicator whereas the term 'hash' refers to a message digest code.)
 **
 
 When {{HASH}} appears in the text herein, it can always be displayed because the browser
@@ -161,6 +166,9 @@ These are the reserved words, which are not permitted for the author to use in a
  - Include sets a hash (or other unique value) that refers to a template document to be included within this document.
  - V is a version number. The values are reserved for the future, but likely look like: 1.2.3 .
  - END is not allowed for any heading (or parameter) as it ends the document.
+ - SIG can only be used for signatures, within that section.
+ - Signatures can only be used to head the signature section.
+ - TITLE is reserved for the contents of the leading heading of one hashmark only.
 
 ## Markdown Formatting
 
@@ -203,9 +211,10 @@ These are subject of a higher level, and are left as exercise to the reader, um 
 
 **Dispute_Resolution.**  All disputes will be resolved by rolling fair dice at a beach bar of my choice, loser to pay the next round.
 
-### Sigs <!-- Part 1 the internal signatures -->
+### Signatures <!-- Part 1 the internal signatures -->
 
-By convention only, any signatures are collected under a heading Sigs.
+By convention only, any signatures are collected under a heading Signatures.
+
 Each individual signature is recorded in an (array) parameter of name Sig:
 
  * Sig = 8d5859f6e6d66ddc24501b4ac1da2b3f7cb93e04
@@ -223,7 +232,7 @@ The code calculates the {{HASH}} over the document from the first heading to the
 
 Anything not included above is missing.  File a dispute.  Find my beach bar, bring dice and money.
 
-### Sigs <!-- Part 2 the external Signature section -->
+### Signatures <!-- Part 2 the external Signature section -->
 
 External signatures can be added and encoded like this, being a final bullet point with tag name of SIG:
    * SIG = 8d5859f6e6d66ddc24501b4ac1da2b3f7cb93e04
